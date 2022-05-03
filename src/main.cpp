@@ -1,4 +1,4 @@
-/*
+/**
  * @file
  * @brief This is a file.
  */
