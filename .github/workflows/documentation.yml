@@ -30,10 +30,14 @@ jobs:
         
     - name: Debug3
       run: |
-        ls ${{ github.workspace }}/internal/doc/html
+        ls ${{ github.workspace }}/internal/doc/html/.*
     
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: "./internal/doc/html"
+        
+    - name: Debug4
+      run: |
+        ls ${{ github.workspace }}/internal/doc/html/.*
