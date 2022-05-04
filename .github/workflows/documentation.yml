@@ -32,9 +32,11 @@ jobs:
         doxyfile-path: "./internal/doc/Doxyfile"
         working-directory: "."
     
-    - name: Debug
+    - name: Debug1
       run: |
         ls ${{ github.workspace }}
+        
+    - name: Debug2
       run: |
         ls ${{ github.workspace }}/internal/doc
     
