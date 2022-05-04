@@ -68,7 +68,7 @@ jobs:
       
       # Commit and push changes.
       - name: Commit and push changes
-        run:
+        run: |
           cd target
           git add internal/doc/*
           git commit -m "Automatically updated documentation."
