@@ -24,7 +24,8 @@ jobs:
       # Run Doxygen.
       - name: Run Doxygen
         run: |
-          cd repository; doxygen internal/doc/Doxyfile
+          cd repository
+          doxygen internal/doc/Doxyfile
 
       # Store the documentation files.
       - name: Upload Output Directory
@@ -39,33 +40,23 @@ jobs:
     needs: build
     permissions: write-all
     steps:
-      # Checkout gh-pages-doc branch.
+      # Checkout target repository.
       - uses: actions/checkout@v2
         with:
           repository: rr-mark/target
-          ref: gh-pages-doc
           path: target
-      
-      # Change directory into target.
-      - name: Change directory into target
-        run: |
-          cd target
 
       # download the documentation files.
       - name: Download Output Directory
         uses: actions/download-artifact@v2
         with:
           name: doc-files
-          path: internal/doc
-
-      # Add, commit and push to gh-pages-doc.
-      # Uses an unmodified fork of EndBug/add-and-commit.
-      # (Forked for security reasons.)
-      - name: Commit changes
-        uses: rr-mark/add-and-commit@v7
-        with:
-          author_name: Mark Johnson
-          author_email: mark@rivelinrobotics.com
-          message: 'Update docs'
-          branch: gh-pages-doc
-          add: '["internal/doc/html/*"]'
+          path: target/internal/doc
+      
+      # Commit and push changes.
+      - name: Commit and push changes
+        run:
+          cd target
+          git add internal/doc/*
+          git commit -m "Automatically updated documentation."
+          git push origin master
