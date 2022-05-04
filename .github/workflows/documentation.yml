@@ -41,12 +41,21 @@ jobs:
     needs: build
     permissions: write-all
     steps:
+      # Setup SSH key.
+      name: Setup SSH Key
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+        ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ssh-add - <<< "${{ secrets.TARGET_SSH_PRIVATE_KEY }}"
+      
       # Checkout target repository.
       - uses: actions/checkout@v2
         with:
           repository: rr-mark/target
           ref: master
           path: target
+          ssh-key: ''
 
       # download the documentation files.
       - name: Download Output Directory
