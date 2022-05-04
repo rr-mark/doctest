@@ -12,7 +12,7 @@ jobs:
 
       # generate the C++ doxygen files
       - name: Doxygen Action C++
-        uses: mattnotmitt/doxygen-action@v1.3.1
+        uses: rr-mark/doxygen-action@v1.3.1
         with:
           working-directory: '.'
           doxyfile-path: 'internal/doc/Doxyfile'
@@ -44,7 +44,7 @@ jobs:
 
       # add, commit and push to gh-pages
       - name: Commit changes
-        uses: EndBug/add-and-commit@v7
+        uses: rr-mark/add-and-commit@v7
         with:
           author_name: Mark Johnson
           author_email: mark@rivelinrobotics.com
