@@ -57,13 +57,13 @@ jobs:
           name: doc-files
           path: target/internal/doc
           
-      # Setup SSH key.
-      - name: Setup SSH Key
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.TARGET_SSH_PRIVATE_KEY }}"
+      ## Setup SSH key.
+      #- name: Setup SSH Key
+      #  env:
+      #    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #  run: |
+      #    ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+      #    ssh-add - <<< "${{ secrets.TARGET_SSH_PRIVATE_KEY }}"
           
       #ssh-keyscan -H https://github.com/rr-mark/target > ~/.ssh/known_hosts
       
