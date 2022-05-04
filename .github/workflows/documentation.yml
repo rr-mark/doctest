@@ -39,6 +39,10 @@ jobs:
     - name: Debug2
       run: |
         ls ${{ github.workspace }}/internal/doc
+        
+    - name: Debug3
+      run: |
+        ls ${{ github.workspace }}/internal/doc/html
     
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
