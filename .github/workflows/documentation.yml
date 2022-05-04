@@ -1,10 +1,14 @@
 name: 'Deploy Doxygen documentation to GitHub Pages'
+on:
+  push:
+    branches:
+    - master
 inputs:
   github_token:
     description: 'A GitHub token for pushing to the repo.'
     required: true
   branch:
-    description: 'Branch name for pushing GitHub Pages files.'
+    description: 'ranch name for pushing GitHub Pages files.'
     required: true
     default: "gh-pages"
   folder:
@@ -14,22 +18,22 @@ inputs:
 runs:
   using: "composite"
   steps:
-   - name: Checkout repository
-     uses: actions/checkout@v2
-     with:
-       submodules: "true"
-   - name: Install Doxygen
-     run: sudo apt-get install doxygen -y
-     shell: bash
-   - name: Generate Doxygen Documentation
-     run: doxygen
-     shell: bash
-   - name: Create .nojekyll
-     run: touch ${{ inputs.folder }}/.nojekyll
-     shell: bash
-   - name: Deploy to GithubPages
-     uses: JamesIves/github-pages-deploy-action@3.7.1
-     with:
-       github_token: ${{ inputs.github_token }}
-       branch: ${{ inputs.branch }}
-       folder: ${{ inputs.folder }}
+  - name: Checkout repository
+    uses: actions/checkout@v2
+    with:
+      submodules: "true"
+  - name: Install Doxygen
+    run: sudo apt-get install doxygen -y
+    shell: bash
+  - name: Generate Doxygen Documentation
+    run: doxygen
+    shell: bash
+  - name: Create .nojekyll
+    run: touch ${{ inputs.folder }}/.nojekyll
+    shell: bash
+  - name: Deploy to GithubPages
+    uses: JamesIves/github-pages-deploy-action@3.7.1
+    with:
+      github_token: ${{ inputs.github_token }}
+      branch: ${{ inputs.branch }}
+      folder: ${{ inputs.folder }}
