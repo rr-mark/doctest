@@ -41,15 +41,6 @@ jobs:
     needs: build
     permissions: write-all
     steps:
-      # Setup SSH key.
-      - name: Setup SSH Key
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.TARGET_SSH_PRIVATE_KEY }}"
-          
-      #ssh-keyscan -H https://github.com/rr-mark/target > ~/.ssh/known_hosts
       
       # Checkout target repository.
       - uses: actions/checkout@v2
@@ -65,11 +56,23 @@ jobs:
         with:
           name: doc-files
           path: target/internal/doc
+          
+      # Setup SSH key.
+      - name: Setup SSH Key
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.TARGET_SSH_PRIVATE_KEY }}"
+          
+      #ssh-keyscan -H https://github.com/rr-mark/target > ~/.ssh/known_hosts
       
       # Commit and push changes.
       - name: Commit and push changes
         run: |
           cd target
+          git config --global user.email "mark@rivelinrobotics.com"
+          git config --global user.name "Mark Johnson"
           git add internal/doc/*
           git commit -m "Automatically updated documentation."
           git push origin master
