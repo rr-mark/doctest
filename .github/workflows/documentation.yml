@@ -1,4 +1,4 @@
-name: Documentation generation CI
+name: Generate and deploy documentation
 on:
   push:
     branches: [ master ]
@@ -7,17 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # checkout myBranch
+      # Checkout master branch.
       - uses: actions/checkout@v2
 
-      # generate the C++ doxygen files
+      # Run doxygen to generate documentation files.
+      # Uses an unmodified fork of mattnotmitt/doxygen-action.
+      # (Forked for security reasons.)
       - name: Doxygen Action C++
         uses: rr-mark/doxygen-action@v1.3.1
         with:
           working-directory: '.'
           doxyfile-path: 'internal/doc/Doxyfile'
 
-      # store the doc files
+      # Store the documentation files.
       - name: Upload Output Directory
         uses: actions/upload-artifact@v2
         with:
@@ -30,19 +32,21 @@ jobs:
     needs: build
     permissions: write-all
     steps:
-      # checkout the gh-pages branch
+      # Checkout gh-pages branch.
       - uses: actions/checkout@v2
         with:
           ref: gh-pages
 
-      # download the doc files, most of which are generated above
+      # download the documentation files.
       - name: Download Output Directory
         uses: actions/download-artifact@v2
         with:
           name: doc-files
           path: internal/doc
 
-      # add, commit and push to gh-pages
+      # Add, commit and push to gh-pages.
+      # Uses an unmodified fork of EndBug/add-and-commit.
+      # (Forked for security reasons.)
       - name: Commit changes
         uses: rr-mark/add-and-commit@v7
         with:
