@@ -11,10 +11,11 @@ jobs:
       # Checkout master branch.
       - uses: actions/checkout@v2
       
-      # Install Doxygen.
+      # Install Doxygen and Graphviz.
       - name: Install Doxygen
         run: |
           sudo apt-get update
+          sudo apt-get install graphviz
           sudo apt-get install doxygen
       
       # Run Doxygen.
