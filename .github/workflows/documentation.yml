@@ -48,6 +48,7 @@ jobs:
         run: |
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "${{ secrets.TARGET_SSH_PRIVATE_KEY }}"
+          ssh-keyscan -H https://github.com/rr-mark/target > ~/.ssh/known_hosts
       
       # Checkout target repository.
       - uses: actions/checkout@v2
@@ -55,7 +56,7 @@ jobs:
           repository: rr-mark/target
           ref: master
           path: target
-          ssh-key: ''
+          ssh-key: ${{ secrets.TARGET_SSH_PRIVATE_KEY }}
 
       # download the documentation files.
       - name: Download Output Directory
