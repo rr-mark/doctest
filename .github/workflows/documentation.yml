@@ -32,6 +32,12 @@ jobs:
         doxyfile-path: "./internal/doc/Doxyfile"
         working-directory: "."
     
+    - name: Debug
+      run: |
+        ls ${{ github.workspace }}
+      run: |
+        ls ${{ github.workspace }}/internal/doc
+    
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
