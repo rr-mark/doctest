@@ -14,11 +14,6 @@ jobs:
           repository: ${{ github.repository }}
           path: repository
       
-      # Change directory into repository.
-      - name: Change directory into repository
-        run: |
-          cd repository
-      
       # Install Graphviz and Doxygen.
       - name: Install Graphviz and Doxygen
         run: |
@@ -29,14 +24,14 @@ jobs:
       # Run Doxygen.
       - name: Run Doxygen
         run: |
-          doxygen internal/doc/Doxyfile
+          cd repository; doxygen internal/doc/Doxyfile
 
       # Store the documentation files.
       - name: Upload Output Directory
         uses: actions/upload-artifact@v2
         with:
           name: doc-files
-          path: internal/doc
+          path: repository/internal/doc
           retention-days: 1
 
   copy:
