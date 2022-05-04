@@ -10,6 +10,12 @@ jobs:
     steps:
       # Checkout master branch.
       - uses: actions/checkout@v2
+      
+      # Install Doxygen.
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install doxygen
 
       # Run doxygen to generate documentation files.
       # Uses an unmodified fork of mattnotmitt/doxygen-action.
