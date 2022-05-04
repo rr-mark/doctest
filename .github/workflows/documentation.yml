@@ -32,10 +32,10 @@ jobs:
     needs: build
     permissions: write-all
     steps:
-      # Checkout gh-pages branch.
+      # Checkout gh-pages-doc branch.
       - uses: actions/checkout@v2
         with:
-          ref: gh-pages
+          ref: gh-pages-doc
 
       # download the documentation files.
       - name: Download Output Directory
@@ -44,7 +44,7 @@ jobs:
           name: doc-files
           path: internal/doc
 
-      # Add, commit and push to gh-pages.
+      # Add, commit and push to gh-pages-doc.
       # Uses an unmodified fork of EndBug/add-and-commit.
       # (Forked for security reasons.)
       - name: Commit changes
@@ -53,5 +53,5 @@ jobs:
           author_name: Mark Johnson
           author_email: mark@rivelinrobotics.com
           message: 'Update docs'
-          branch: gh-pages
+          branch: gh-pages-doc
           add: '["internal/doc/html/*"]'
