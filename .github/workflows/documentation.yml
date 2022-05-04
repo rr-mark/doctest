@@ -10,9 +10,17 @@ jobs:
     steps:
       # Checkout master branch.
       - uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          path: repository
       
-      # Install Doxygen and Graphviz.
-      - name: Install Doxygen
+      # Change directory into repository.
+      - name: Change directory into repository
+        run: |
+          cd repository
+      
+      # Install Graphviz and Doxygen.
+      - name: Install Graphviz and Doxygen
         run: |
           sudo apt-get update
           sudo apt-get install graphviz
@@ -22,15 +30,6 @@ jobs:
       - name: Run Doxygen
         run: |
           doxygen internal/doc/Doxyfile
-
-      # Run doxygen to generate documentation files.
-      # Uses an unmodified fork of mattnotmitt/doxygen-action.
-      # (Forked for security reasons.)
-      #- name: Doxygen Action C++
-      #  uses: rr-mark/doxygen-action@v1.3.1
-      #  with:
-      #    working-directory: '.'
-      #    doxyfile-path: 'internal/doc/Doxyfile'
 
       # Store the documentation files.
       - name: Upload Output Directory
@@ -48,7 +47,14 @@ jobs:
       # Checkout gh-pages-doc branch.
       - uses: actions/checkout@v2
         with:
+          repository: rr-mark/target
           ref: gh-pages-doc
+          path: target
+      
+      # Change directory into target.
+      - name: Change directory into target
+        run: |
+          cd target
 
       # download the documentation files.
       - name: Download Output Directory
