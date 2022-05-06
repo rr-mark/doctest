@@ -34,9 +34,7 @@ jobs:
       - name: Clear previous documentation
         run: |
           cd target
-          git rm -rf internal
-          mkdir internal
-          mkdir internal/docs
+          git rm -rf internal/docs/*
       
       # Run Doxygen.
       - name: Run Doxygen
@@ -50,6 +48,6 @@ jobs:
           cd target
           git config --global user.email "mark@rivelinrobotics.com"
           git config --global user.name "Mark Johnson"
-          git add internal/doc/*
+          git add internal/docs/*
           git commit -m "Automatically updated documentation."
           git push origin master
