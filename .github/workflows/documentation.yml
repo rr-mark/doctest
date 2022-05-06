@@ -34,7 +34,7 @@ jobs:
       - name: Clear previous documentation
         run: |
           cd target
-          git rm -rf internal/docs/*
+          git rm -r --ignore-unmatch internal/docs/*
       
       # Run Doxygen.
       - name: Run Doxygen
