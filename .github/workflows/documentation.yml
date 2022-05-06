@@ -20,8 +20,6 @@ jobs:
         run: |
           git config --global user.email "mark@rivelinrobotics.com"
           git config --global user.name "Mark Johnson"
-          git config --global user.email "ark@rivelinrobotics.com"
-          git config --global user.name "ark Johnson"
       
       # Checkout master branch.
       - uses: actions/checkout@v2
