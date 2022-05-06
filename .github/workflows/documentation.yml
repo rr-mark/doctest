@@ -15,6 +15,14 @@ jobs:
           sudo apt-get install graphviz
           sudo apt-get install doxygen
       
+      # Configure git settings.
+      - name: Configure git settings
+        run: |
+          git config --global user.email "mark@rivelinrobotics.com"
+          git config --global user.name "Mark Johnson"
+          git config --global user.email "ark@rivelinrobotics.com"
+          git config --global user.name "ark Johnson"
+      
       # Checkout master branch.
       - uses: actions/checkout@v2
         with:
@@ -46,8 +54,6 @@ jobs:
       - name: Commit and push changes
         run: |
           cd target
-          git config --global user.email "mark@rivelinrobotics.com"
-          git config --global user.name "Mark Johnson"
           git add internal/docs/*
           git commit -m "Automatically updated documentation."
           git push origin master
