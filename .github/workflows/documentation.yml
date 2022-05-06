@@ -31,7 +31,7 @@ jobs:
           ssh-key: ${{ secrets.TARGET_SSH_PRIVATE_KEY }}
       
       # Clear previous documentation.
-      - name Clear previous documentation
+      - name: Clear previous documentation
         run: |
           cd target
           git rm -rf internal
