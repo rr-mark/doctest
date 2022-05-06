@@ -1,5 +1,6 @@
 name: Generate and deploy documentation
 on:
+  workflow_trigger:
   push:
     branches: [ master, test ]
 
