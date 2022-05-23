@@ -12,6 +12,8 @@ jobs:
       # Test GITHUB_ACTIONS
       - name: Test GitHub actions
         run: |
+          pwd
+          ls
           ./activate.sh
 
       # Install Graphviz and Doxygen.
