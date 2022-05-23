@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+      # Test GITHUB_ACTIONS
+      -name: Test GitHub actions
+       run: |
+         ./activate.sh
+
       # Install Graphviz and Doxygen.
       - name: Install Graphviz and Doxygen
         run: |
